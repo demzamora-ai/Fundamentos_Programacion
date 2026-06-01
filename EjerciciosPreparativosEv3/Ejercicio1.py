@@ -4,10 +4,13 @@ productos = {
 "Monitor": [3, 180000]
 }
 
-
 #definicion de funciones
 def agregar_producto(productos):
     nombre = input ("Nombre del producto: ").strip()
+
+    if nombre.isdigit():
+     print("Debe ingresar letras!!!")
+
 
     if nombre =="":
         print("El nombre no puede ser vacio")
@@ -15,12 +18,59 @@ def agregar_producto(productos):
     if nombre in productos:
         print("El producto ya existe!")
         return 
-    stock = int(input("Ingrese stock: "))
-    precio = int(input("Ingrese precio"))
-    productos[nombre] = [stock, precio]
-    print("Productos agregados correctamente!")
+    while (True): 
+        try: 
+            stock = int(input("Ingrese stock: "))
+            
+        except:
+            print("Debe ingresar un numero!!, vuelva a intentar")
+
+        while (True):
+            try:
+                precio = int(input("Ingrese precio"))
+                break
+            except:
+                print("Debe ingresar un numero!!, vuelve a intentar ")
+
+        productos[nombre] = [stock, precio]
+        print("Productos agregados correctamente!")
 
 
+def mostrar_productos(productos):
+    if len(productos) == 0:
+        print("No existen productos")
+        return
+for nombre in productos:
+    print(nombre,"--stock:",productos[nombre][0],"--Precio:",productos[nombre][0])
+
+
+    def buscar_producto(productos):
+        if len (productos) == 0 :
+            print("No existen productos")
+            return
+        
+        nombre = input("Nombre producto a buscar: ").strip()
+
+        if nombre in productos:
+            print("Producto encontrado")
+            print(f"Stock:{productos[nombre][0]}")
+            print(f"precio $ {productos[nombre][1]}")
+        else:
+           print("Producto no existe o agotado")
+def producto_mas_caro(productos):
+    if len(productos) == 0 :
+        print("No existen productos")
+        return
+    mayor = 0
+    mayor_Nombre = ""
+    for nombre in productos :
+      precio = productos[nombre][1]
+       
+      if precio > mayor :
+          mayor_nombre=nombre
+
+    print(f"Producto mas caro es {mayor_nombre}")
+    print(f"")
 
 productos={}
 
@@ -54,3 +104,4 @@ while (True):
         print("Fin del programa")
     else:
         print("Opcion invalida")
+
